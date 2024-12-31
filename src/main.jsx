@@ -13,27 +13,42 @@ import CategoryList from "./pages/admin/category/index.jsx";
 import EditCategory from "./pages/admin/category/edit.jsx";
 import ViewCategory from "./pages/admin/category/view.jsx";
 import AddCategory from "./pages/admin/category/add.jsx";
+import Register from "./pages/auth/Register.jsx";
+import Login from "./pages/auth/Login.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import ProtectedRoute from "./ProtectedRoute.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <StrictMode>
-      <Routes>
-        <Route path="/" element={<Home />}>
-          <Route path="product" element={<ProductList />} />
-        </Route>
-        <Route path="admin" element={<Admin />}>
-          <Route path="product" element={<ProductList />}>
-            <Route path="add" element={<AddProduct />} />
-            <Route path="edit/:id" element={<EditProduct />} />
-            <Route path="view/:id" element={<ViewProduct />} />
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route path="product" element={<ProductList />} />
+            <Route path="register" element={<Register />}></Route>
+            <Route path="login" element={<Login />}></Route>
           </Route>
-          <Route path="category" element={<CategoryList />}>
-            <Route path="add" element={<AddCategory />} />
-            <Route path="edit/:id" element={<EditCategory />} />
-            <Route path="view/:id" element={<ViewCategory />} />
+          <Route
+            path="admin"
+            element={
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="product" element={<ProductList />}>
+              {/* <Route path="add" element={<AddProduct />} />
+              <Route path="edit/:id" element={<EditProduct />} />
+              <Route path="view/:id" element={<ViewProduct />} /> */}
+            </Route>
+            <Route path="category" element={<CategoryList />}>
+              <Route path="add" element={<AddCategory />} />
+              <Route path="edit/:id" element={<EditCategory />} />
+              <Route path="view/:id" element={<ViewCategory />} />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
+        </Routes>
+      </AuthProvider>
     </StrictMode>
   </BrowserRouter>
 );
