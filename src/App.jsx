@@ -1,9 +1,19 @@
-import React from "react";
-import { Client } from "appwrite";
+import {
+  Button,
+  Navbar as MTNavbar,
+  Typography,
+} from "@material-tailwind/react";
+import { useUser } from "./lib/context/user";
+import Home from "./pages/Home";
 
-const client = new Client();
-client.setProject("676f17120023574cecd2");
-
-export default function Inventory() {
-  return <div>Inventory</div>;
+function App() {
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <main>
+        <Home />
+      </main>
+    </div>
+  );
 }
+
+export default App;
