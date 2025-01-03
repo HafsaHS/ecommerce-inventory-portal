@@ -1,73 +1,73 @@
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-} from "@material-tailwind/react";
+import { Card, CardBody, Typography } from "@material-tailwind/react";
 
-const products = [
+export function ProductListCard({ img, name, price }) {
+  return (
+    <Card shadow={false} className="border border-gray-300">
+      <CardBody className="pb-0">
+        <img src={img} alt={img} className="min-w-[280px] w-full" />
+        <div className="flex justify-between">
+          <div>
+            <Typography className="mb-2" color="blue-gray" variant="h5">
+              {name}
+            </Typography>
+            <div className="mb-5 flex items-center gap-2">
+              <div className="h-5 w-5 rounded border border-gray-900 bg-brown-300 "></div>
+              <div className="h-5 w-5 rounded border border-blue-gray-100 "></div>
+              <div className="h-5 w-5 rounded border border-blue-gray-100 bg-gray-900 "></div>
+            </div>
+          </div>
+          <Typography variant="h5" className="text-gray-600">
+            {price}
+          </Typography>
+        </div>
+      </CardBody>
+    </Card>
+  );
+}
+
+const CONTENTS = [
   {
-    id: 1,
-    title: "Product 1",
-    description: "A short description of Product 1.",
-    price: "$20.00",
-    image: "https://source.unsplash.com/random/400x300?product",
+    img: "https://www.material-tailwind.com/image/product-4.png",
+    name: "Linen Suit",
+    price: "$2,500",
   },
   {
-    id: 2,
-    title: "Product 2",
-    description: "A short description of Product 2.",
-    price: "$35.00",
-    image: "https://source.unsplash.com/random/400x300?product",
+    img: "https://www.material-tailwind.com/image/product-3.png",
+    name: "Tweed Suit",
+    price: "$2,300",
   },
   {
-    id: 3,
-    title: "Product 3",
-    description: "A short description of Product 3.",
-    price: "$50.00",
-    image: "https://source.unsplash.com/random/400x300?product",
-  },
-  {
-    id: 4,
-    title: "Product 4",
-    description: "A short description of Product 4.",
-    price: "$25.00",
-    image: "https://source.unsplash.com/random/400x300?product",
+    img: "https://www.material-tailwind.com/image/product-5.png",
+    name: "Premium Suit",
+    price: "$1,240",
   },
 ];
 
-export default function Home() {
+export function ProductListSection4() {
   return (
-    <section className="flex flex-wrap justify-center gap-6 p-6 bg-gray-100 min-h-screen">
-      {products.map((product) => (
-        <Card key={product.id} className="w-72">
-          <img
-            src={product.image}
-            alt={product.title}
-            className="h-48 w-full object-cover"
-          />
-          <CardBody>
-            <Typography variant="h6" className="text-gray-800">
-              {product.title}
-            </Typography>
-            <Typography variant="small" className="text-gray-600 line-clamp-2">
-              {product.description}
-            </Typography>
-            <Typography variant="h5" className="text-blue-500 mt-2">
-              {product.price}
-            </Typography>
-          </CardBody>
-          <CardFooter className="pt-0 flex justify-between items-center">
-            <Button size="sm" color="blue">
-              View
-            </Button>
-            <Button size="sm" color="green">
-              Buy
-            </Button>
-          </CardFooter>
-        </Card>
-      ))}
+    <section className="py-10 px-8">
+      <div className="mx-auto text-center mb-16">
+        <Typography className="font-medium text-lg">
+          Tailored Product Search
+        </Typography>
+        <Typography variant="h1" className="my-4 text-4xl">
+          Find What You Need
+        </Typography>
+        <Typography className="!font-normal text-gray-500 mx-auto max-w-2xl">
+          Simplify your shopping experience with our intuitive filter system.
+          Whether you&apos;re looking for specific features, price ranges, or
+          brands.
+        </Typography>
+      </div>
+      <div className="mx-auto container">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 md:grid-cols-2">
+          {CONTENTS.map(({ img, name, price }, index) => (
+            <ProductListCard key={index} img={img} name={name} price={price} />
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
+
+export default ProductListSection4;
