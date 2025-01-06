@@ -6,7 +6,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router";
 import * as Yup from "yup";
 
-export function Login() {
+function Login() {
   const user = useUser();
   const navigate = useNavigate();
   const [passwordShown, setPasswordShown] = useState(false);

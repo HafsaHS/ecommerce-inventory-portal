@@ -5,7 +5,7 @@ import ProtectedRoutes from "./ProtectedRoutes.jsx";
 import "./index.css";
 import { GlobalProvider } from "./lib/context/global.jsx";
 import { UserProvider } from "./lib/context/user.jsx";
-import { Login } from "./pages/login.jsx";
+import Login from "./pages/login.jsx";
 import ProdcutDetail from "./pages/admin/product/product_detail.jsx";
 import Admin from "./pages/admin/index.jsx";
 import AddCategory from "./pages/admin/category/add.jsx";
