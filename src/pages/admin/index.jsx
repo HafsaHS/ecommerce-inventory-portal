@@ -30,18 +30,24 @@ function NavList() {
   );
 }
 
-export default function Admin() {
+const Admin = () => {
   const user = useUser();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
   React.useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpen(false)
-    );
-  }, []);
+    const handleResize = () => {
+      if (window.innerWidth >= 960) {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); // Empty dependency array since we're not using any external dependencies
 
   return (
     <div>
@@ -66,7 +72,10 @@ export default function Admin() {
               <Button
                 color="gray"
                 className="hidden lg:inline-block"
-                onClick={() => account.deleteSession("current")}
+                onClick={() => {
+                  account.deleteSession("current");
+                  navigate("/login");
+                }}
               >
                 Sign Out
               </Button>
@@ -103,7 +112,14 @@ export default function Admin() {
                 <Typography className="text-sm text-white">
                   {user.current.email}
                 </Typography>
-                <Button className="mb-2" fullWidth>
+                <Button
+                  className="mb-2"
+                  fullWidth
+                  onClick={() => {
+                    account.deleteSession("current");
+                    navigate("/login");
+                  }}
+                >
                   Sign Out
                 </Button>
               </>
@@ -122,4 +138,6 @@ export default function Admin() {
       <Outlet />
     </div>
   );
-}
+};
+
+export default Admin;
