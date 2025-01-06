@@ -13,7 +13,9 @@ export function EditProduct() {
 
   const validationSchema = Yup.object({
     title: Yup.string().required("Title is required"),
-    // description: Yup.string(),
+    price: Yup.number().required("Price is required"),
+    stock: Yup.number().required("Stock is required"),
+    description: Yup.string(),
   });
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
@@ -59,14 +61,15 @@ export function EditProduct() {
               initialValues={{
                 $id: product.$id,
                 title: product.title,
-                // description: product.description,
+                price: product.price,
+                stock: product.stock,
+                description: product.description,
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
             >
               {({ isSubmitting }) => (
                 <Form className="flex flex-col gap-4 lg:max-w-lg">
-                  {/* Title */}
                   <div>
                     <Typography
                       variant="small"
@@ -90,8 +93,7 @@ export function EditProduct() {
                       className="text-sm text-red-500 mt-1"
                     />
                   </div>
-                  {/* Description */}
-                  {/* <div>
+                  <div>
                     <Typography
                       variant="small"
                       className="mb-2 text-left font-medium !text-gray-900"
@@ -113,8 +115,55 @@ export function EditProduct() {
                       component="div"
                       className="text-sm text-red-500 mt-1"
                     />
-                  </div> */}
-                  {/* Submit Button */}
+                  </div>
+                  <div>
+                    <Typography
+                      variant="small"
+                      className="mb-2 text-left font-medium !text-gray-900"
+                    >
+                      Price
+                    </Typography>
+                    <Field name="price">
+                      {({ field }) => (
+                        <Input
+                          {...field}
+                          color="gray"
+                          size="lg"
+                          placeholder="Price"
+                          type="number"
+                        />
+                      )}
+                    </Field>
+                    <ErrorMessage
+                      name="price"
+                      component="div"
+                      className="text-sm text-red-500 mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Typography
+                      variant="small"
+                      className="mb-2 text-left font-medium !text-gray-900"
+                    >
+                      Stock
+                    </Typography>
+                    <Field name="stock">
+                      {({ field }) => (
+                        <Input
+                          {...field}
+                          color="gray"
+                          size="lg"
+                          placeholder="Stock"
+                          type="number"
+                        />
+                      )}
+                    </Field>
+                    <ErrorMessage
+                      name="stock"
+                      component="div"
+                      className="text-sm text-red-500 mt-1"
+                    />
+                  </div>
                   <div className="flex flex-col justify-between mt-4">
                     <Button
                       size="lg"
