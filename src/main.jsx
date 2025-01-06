@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
-import App from "./App.jsx";
+import App from "./app.jsx";
 import ProtectedRoutes from "./ProtectedRoutes.jsx";
 import "./index.css";
 import { GlobalProvider } from "./lib/context/global.jsx";
