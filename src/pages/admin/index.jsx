@@ -24,9 +24,8 @@ function NavItem({ label, link }) {
 function NavList() {
   return (
     <ul className="mb-4 mt-2 flex flex-col gap-3 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-8">
-      <NavItem label="Products" link="/admin/products" />
-      <NavItem label="Categories" link="/admin/categories" />
-      <NavItem label="Ideas" link="/admin/ideas" />
+      <NavItem label="Products" link="/admin/product" />
+      <NavItem label="Categories" link="/admin/category" />
     </ul>
   );
 }
