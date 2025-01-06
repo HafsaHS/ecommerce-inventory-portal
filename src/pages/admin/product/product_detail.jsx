@@ -1,11 +1,11 @@
-import React from "react";
+import { HeartIcon } from "@heroicons/react/24/outline";
 import {
   Button,
   IconButton,
   Rating,
   Typography,
 } from "@material-tailwind/react";
-import { HeartIcon } from "@heroicons/react/24/outline";
+import React from "react";
 
 export function ProdcutDetail() {
   return (

@@ -95,7 +95,7 @@ export function AddProduct() {
                   >
                     Category
                   </Typography>
-                  <select
+                  {/* <select
                     name="colorss"
                     value={values.color}
                     onChange={handleChange}
@@ -116,7 +116,7 @@ export function AddProduct() {
                     <option value="green" label="green">
                       green
                     </option>
-                  </select>
+                  </select> */}
                   <Field name="category">
                     {({ field, form }) => (
                       <Select

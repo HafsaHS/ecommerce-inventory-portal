@@ -16,7 +16,7 @@ export function useGlobal() {
   return useContext(GlobalContext);
 }
 
-export function GlobalProvider(props) {
+export function GlobalProvider({ children }) {
   const [ideas, setIdeas] = useState([]);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -206,7 +206,7 @@ export function GlobalProvider(props) {
         GetSingleCategory,
       }}
     >
-      {props.children}
+      {children}
     </GlobalContext.Provider>
   );
 }

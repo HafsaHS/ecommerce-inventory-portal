@@ -7,18 +7,10 @@ import {
   CardBody,
   CardHeader,
   IconButton,
-  Input,
   Typography,
 } from "@material-tailwind/react";
 
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import {
-  DocumentMagnifyingGlassIcon,
-  FlagIcon,
-  MagnifyingGlassIcon,
-  PencilIcon,
-  TrashIcon,
-} from "@heroicons/react/24/solid";
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router";
 import { useGlobal } from "../../../lib/context/global";
 

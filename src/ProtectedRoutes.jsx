@@ -1,7 +1,5 @@
-import { Outlet, Navigate } from "react-router";
+import { Navigate, Outlet } from "react-router";
 import { useUser } from "./lib/context/user";
-import { account } from "./lib/appwrite";
-import { useEffect } from "react";
 
 const ProtectedRoutes = () => {
   const { current: user, loading } = useUser();

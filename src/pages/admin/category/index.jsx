@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import {
   Button,
   Card,
@@ -7,7 +7,7 @@ import {
   IconButton,
   Typography,
 } from "@material-tailwind/react";
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useGlobal } from "../../../lib/context/global";
 

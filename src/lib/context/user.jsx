@@ -8,7 +8,7 @@ export function useUser() {
   return useContext(UserContext);
 }
 
-export function UserProvider(props) {
+export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -34,6 +34,7 @@ export function UserProvider(props) {
       console.log(loggedIn);
       setUser(loggedIn);
     } catch (err) {
+      console.error(err);
       setUser(null);
     } finally {
       setLoading(false); // Set loading to false regardless of outcome
@@ -48,7 +49,7 @@ export function UserProvider(props) {
     <UserContext.Provider
       value={{ current: user, loading, login, logout, register }}
     >
-      {props.children}
+      {children}
     </UserContext.Provider>
   );
 }
