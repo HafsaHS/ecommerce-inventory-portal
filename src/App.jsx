@@ -1,10 +1,4 @@
-import {
-  Button,
-  Navbar as MTNavbar,
-  Typography,
-} from "@material-tailwind/react";
-import { useUser } from "./lib/context/user";
-import Home from "./pages/Home";
+import Home from "./pages/home";
 
 function App() {
   return (
