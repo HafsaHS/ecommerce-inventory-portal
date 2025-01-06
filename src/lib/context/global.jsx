@@ -49,23 +49,26 @@ export function GlobalProvider({ children }) {
     }
   }
 
-  async function EditProduct(id, product) {
+  async function EditProduct(product) {
     try {
       const response = await databases.updateDocument(
         DATABASE_ID,
         PRODUCTS_COLLECTION_ID,
-        id,
-        product
+        product.$id,
+        {
+          title: product.title,
+          description: product.description,
+        }
       );
       setProducts((products) =>
-        products.map((product) => (product.$id === id ? response : product))
+        products.map((pro) => (pro.$id === product.$id ? response : pro))
       );
     } catch (err) {
       console.log(err);
     }
   }
 
-  async function RemoveProduct(id) {
+  async function DeleteProduct(id) {
     try {
       await databases.deleteDocument(DATABASE_ID, PRODUCTS_COLLECTION_ID, id);
       setProducts((products) =>
@@ -100,6 +103,19 @@ export function GlobalProvider({ children }) {
       const response = await databases.getDocument(
         DATABASE_ID,
         CATEGORIES_COLLECTION_ID,
+        id
+      );
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function GetSingleProduct(id) {
+    try {
+      const response = await databases.getDocument(
+        DATABASE_ID,
+        PRODUCTS_COLLECTION_ID,
         id
       );
       return response;
@@ -195,7 +211,7 @@ export function GlobalProvider({ children }) {
         remove,
         AddProduct,
         EditProduct,
-        RemoveProduct,
+        DeleteProduct,
         ProductList,
         products,
         AddCategory,
@@ -204,6 +220,7 @@ export function GlobalProvider({ children }) {
         DeleteCategory,
         EditCategory,
         GetSingleCategory,
+        GetSingleProduct,
       }}
     >
       {children}

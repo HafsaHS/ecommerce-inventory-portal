@@ -13,6 +13,7 @@ import EditCategory from "./pages/admin/category/edit.jsx";
 import CategoryList from "./pages/admin/category/index.jsx";
 import AddProduct from "./pages/admin/product/add.jsx";
 import ProductList from "./pages/admin/product/index.jsx";
+import EditProduct from "./pages/admin/product/edit.jsx";
 
 const root = document.getElementById("root");
 
@@ -30,6 +31,7 @@ createRoot(root).render(
             <Route path="admin" element={<Admin />}>
               <Route path="product" element={<ProductList />} />
               <Route path="product/add" element={<AddProduct />} />
+              <Route path="product/edit/:id" element={<EditProduct />} />
               <Route path="category" element={<CategoryList />} />
               <Route path="category/add" element={<AddCategory />} />
               <Route path="category/edit/:id" element={<EditCategory />} />

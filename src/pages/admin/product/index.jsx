@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-
-// @material-tailwind/react
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import {
   Button,
   Card,
@@ -9,96 +7,32 @@ import {
   IconButton,
   Typography,
 } from "@material-tailwind/react";
-
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useGlobal } from "../../../lib/context/global";
 
-const TABLE_ROW = [
-  {
-    img: "/logos/btc.png",
-    digitalAsset: "BTC",
-    detail: "Bitcoin",
-    price: "$46,727.30",
-    change: "+2.92%",
-    volume: "$45.31B",
-    market: "$915.61B",
-    color: "green",
-    trend: 4,
-  },
-  {
-    img: "/logos/eth.png",
-    digitalAsset: "ETH",
-    detail: "Ethereum",
-    price: "$2,609.30",
-    change: "+6.80%",
-    volume: "$23.42B",
-    market: "$313.58B",
-    color: "green",
-  },
-  {
-    img: "/logos/usdt.png",
-    digitalAsset: "USDT",
-    detail: "TetherUS",
-    price: "$1.00",
-    change: "-0.01%",
-    volume: "$94.37B",
-    market: "$40,600",
-    color: "red",
-  },
-  {
-    img: "/logos/sol.png",
-    digitalAsset: "SOL",
-    detail: "Solana",
-    price: "$1.00",
-    change: "+6.35%",
-    volume: "$3.48B",
-    market: "$43.26B",
-    color: "green",
-  },
-  {
-    img: "/logos/xrp.png",
-    digitalAsset: "XRP",
-    detail: "Ripple",
-    price: "$100.19",
-    change: "-0.95%",
-    volume: "$1.81B",
-    market: "$32.45B",
-    color: "red",
-  },
-];
-
 const TABLE_HEAD = [
-  {
-    head: "Title",
-    customeStyle: "!text-left",
-  },
-  {
-    head: "Price",
-    customeStyle: "text-right",
-  },
-  {
-    head: "Stock",
-    customeStyle: "text-right",
-  },
-  {
-    head: "Category",
-    customeStyle: "text-right",
-  },
-  {
-    head: "Actions",
-    customeStyle: "text-right",
-  },
+  { head: "Title", customeStyle: "!text-left" },
+  { head: "Price", customeStyle: "text-right" },
+  { head: "Stock", customeStyle: "text-right" },
+  { head: "Description", customeStyle: "text-right" },
+  { head: "Actions", customeStyle: "text-right" },
 ];
 
 function ProductList() {
   const navigate = useNavigate();
-  const { products, ProductList } = useGlobal();
+  const { products, ProductList, DeleteProduct } = useGlobal();
 
   useEffect(() => {
-    console.log(products);
-    ProductList(); // Call the function here
+    ProductList(); // Call the function to fetch products
   }, []);
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this Product?")) {
+      DeleteProduct(id);
+    }
+  };
+
   return (
     <section className="m-10">
       <Card className="h-full w-full">
@@ -122,7 +56,7 @@ function ProductList() {
             <Button
               variant="outlined"
               className="flex items-center gap-2"
-              onClick={() => navigate("/admin/product/add")}
+              onClick={() => navigate("/admin/Product/add")}
             >
               Add Product
             </Button>
@@ -149,77 +83,72 @@ function ProductList() {
               </tr>
             </thead>
             <tbody>
-              {products.map(
-                ({ id, title, description, price, stock }, index) => {
-                  const isLast = index === TABLE_ROW.length - 1;
-                  const classes = isLast
-                    ? "!p-4"
-                    : "!p-4 border-b border-gray-300";
-                  return (
-                    <tr key={id}>
-                      <td className={classes}>
-                        <div className="flex items-center gap-4 text-left">
-                          {/* <img
-                            src={img}
-                            alt={digitalAsset}
-                            className="border rounded-md p-1 h-10 w-10"
-                          /> */}
-                          <div>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="!font-semibold"
-                            >
-                              {title}
-                            </Typography>
-                            <Typography
-                              variant="small"
-                              className="!font-normal text-gray-600"
-                            >
-                              {description}
-                            </Typography>
-                          </div>
+              {products && products.length > 0 ? (
+                products.map(({ $id, title, price, stock, description }) => (
+                  <tr key={$id}>
+                    <td className="!p-4 border-b border-gray-300">
+                      <div className="flex items-center gap-4 text-left">
+                        <div>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="!font-semibold"
+                          >
+                            {title}
+                          </Typography>
                         </div>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          className="!font-normal text-gray-600 text-right"
+                      </div>
+                    </td>
+                    <td className="!p-4 border-b border-gray-300">
+                      <Typography
+                        variant="small"
+                        className="!font-normal text-right"
+                      >
+                        {price}
+                      </Typography>
+                    </td>
+                    <td className="!p-4 border-b border-gray-300">
+                      <Typography
+                        variant="small"
+                        className="!font-normal text-right"
+                      >
+                        {stock}
+                      </Typography>
+                    </td>
+                    <td className="!p-4 border-b border-gray-300">
+                      <Typography
+                        variant="small"
+                        className="!font-normal text-gray-600 text-right"
+                      >
+                        {description}
+                      </Typography>
+                    </td>
+                    <td className="!p-4 border-b border-gray-300">
+                      <div className="flex justify-end gap-4">
+                        <IconButton
+                          variant="text"
+                          size="sm"
+                          onClick={() => navigate(`/admin/Product/edit/${$id}`)}
                         >
-                          {price}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          //   color={color}
-                          className="!font-bold text-right"
+                          <PencilIcon className="h-5 w-5 text-gray-900" />
+                        </IconButton>
+                        <IconButton
+                          variant="text"
+                          size="sm"
+                          onClick={() => handleDelete($id)}
                         >
-                          {stock}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          className="!font-normal text-gray-600 text-right"
-                        >
-                          Games
-                        </Typography>
-                      </td>
-
-                      <td className={classes}>
-                        <div className="flex justify-end gap-4">
-                          <IconButton variant="text" size="sm">
-                            <PencilIcon className="h-5 w-5 text-gray-900" />
-                          </IconButton>
-                          <IconButton variant="text" size="sm">
-                            <TrashIcon className="h-5 w-5 text-gray-900" />
-                          </IconButton>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                }
+                          <TrashIcon className="h-5 w-5 text-gray-900" />
+                        </IconButton>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={TABLE_HEAD.length} className="text-center !p-4">
+                    No products available.
+                  </td>
+                </tr>
               )}
             </tbody>
           </table>
