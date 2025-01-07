@@ -19,6 +19,7 @@ export function EditProduct() {
   });
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    console.log(values);
     try {
       await EditProduct(values);
       navigate("/admin/product/");

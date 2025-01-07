@@ -56,7 +56,7 @@ function ProductList() {
             <Button
               variant="outlined"
               className="flex items-center gap-2"
-              onClick={() => navigate("/admin/Product/add")}
+              onClick={() => navigate("/admin/product/add")}
             >
               Add Product
             </Button>
@@ -128,7 +128,7 @@ function ProductList() {
                         <IconButton
                           variant="text"
                           size="sm"
-                          onClick={() => navigate(`/admin/Product/edit/${$id}`)}
+                          onClick={() => navigate(`/admin/product/edit/${$id}`)}
                         >
                           <PencilIcon className="h-5 w-5 text-gray-900" />
                         </IconButton>

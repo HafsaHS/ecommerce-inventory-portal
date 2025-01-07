@@ -58,6 +58,8 @@ export function GlobalProvider({ children }) {
         {
           title: product.title,
           description: product.description,
+          price: product.price,
+          stock: product.stock,
         }
       );
       setProducts((products) =>
@@ -162,53 +164,53 @@ export function GlobalProvider({ children }) {
     }
   }
 
-  async function add(idea) {
-    try {
-      const response = await databases.createDocument(
-        DATABASE_ID,
-        IDEAS_COLLECTION_ID,
-        ID.unique(),
-        idea
-      );
-      setIdeas((ideas) => [response, ...ideas].slice(0, 10));
-    } catch (err) {
-      console.log(err); // handle error or show user a message
-    }
-  }
+  // async function add(idea) {
+  //   try {
+  //     const response = await databases.createDocument(
+  //       DATABASE_ID,
+  //       IDEAS_COLLECTION_ID,
+  //       ID.unique(),
+  //       idea
+  //     );
+  //     setIdeas((ideas) => [response, ...ideas].slice(0, 10));
+  //   } catch (err) {
+  //     console.log(err); // handle error or show user a message
+  //   }
+  // }
 
-  async function remove(id) {
-    try {
-      await databases.deleteDocument(DATABASE_ID, IDEAS_COLLECTION_ID, id);
-      setIdeas((ideas) => ideas.filter((idea) => idea.$id !== id));
-      await init();
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  // async function remove(id) {
+  //   try {
+  //     await databases.deleteDocument(DATABASE_ID, IDEAS_COLLECTION_ID, id);
+  //     setIdeas((ideas) => ideas.filter((idea) => idea.$id !== id));
+  //     await init();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
-  async function init() {
-    try {
-      const response = await databases.listDocuments(
-        DATABASE_ID,
-        IDEAS_COLLECTION_ID,
-        [Query.orderDesc("$createdAt"), Query.limit(10)]
-      );
-      setIdeas(response.documents);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  // async function init() {
+  //   try {
+  //     const response = await databases.listDocuments(
+  //       DATABASE_ID,
+  //       IDEAS_COLLECTION_ID,
+  //       [Query.orderDesc("$createdAt"), Query.limit(10)]
+  //     );
+  //     setIdeas(response.documents);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
-  useEffect(() => {
-    init();
-  }, []);
+  // useEffect(() => {
+  //   init();
+  // }, []);
 
   return (
     <GlobalContext.Provider
       value={{
-        current: ideas,
-        add,
-        remove,
+        // current: ideas,
+        // add,
+        // remove,
         AddProduct,
         EditProduct,
         DeleteProduct,

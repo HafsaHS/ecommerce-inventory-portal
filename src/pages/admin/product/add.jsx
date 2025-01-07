@@ -21,7 +21,7 @@ export function AddProduct() {
     description: Yup.string(),
     price: Yup.number().required("Price is required"),
     stock: Yup.number().required("Stock is required"),
-    category: Yup.string().required("Category is required"),
+    category: Yup.array().of(Yup.string()).required("Category is required"),
   });
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
@@ -123,15 +123,14 @@ export function AddProduct() {
                         color="gray"
                         size="lg"
                         placeholder="Select a category"
-                        value={field.value}
-                        onChange={(value) =>
-                          form.setFieldValue("category", value)
-                        }
-                        onBlur={field.onBlur}
+                        value={field.name}
+                        onChange={(value) => {
+                          form.setFieldValue("category", [value]);
+                        }}
                       >
                         {categories.map((category) => (
                           <Option key={category.$id} value={category.$id}>
-                            {category.title} {field.value}
+                            {category.title}
                           </Option>
                         ))}
                       </Select>
