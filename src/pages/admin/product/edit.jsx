@@ -19,7 +19,6 @@ export function EditProduct() {
   });
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    console.log(values);
     try {
       await EditProduct(values);
       navigate("/admin/product/");
@@ -31,18 +30,18 @@ export function EditProduct() {
     }
   };
 
-  useEffect(() => {
-    async function fetchproduct() {
-      try {
-        const response = await GetSingleProduct(id);
-        setProduct(response);
-      } catch (error) {
-        alert("Error: " + error.message);
-      }
+  const fetchProduct = async () => {
+    try {
+      const response = await GetSingleProduct(id);
+      setProduct(response);
+    } catch (error) {
+      alert("Error: " + error.message);
     }
+  };
 
+  useEffect(() => {
     if (id) {
-      fetchproduct(); // Invoke the function here
+      fetchProduct(); // Invoke the function here
     }
   }, [id]);
 

@@ -37,7 +37,16 @@ export function AddProduct() {
     }
   };
 
-  useEffect(() => CategoryList(), []);
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        await CategoryList();
+      } catch (error) {
+        console.log("Error fetching categories:", error);
+      }
+    }
+    fetchCategories();
+  }, []);
 
   return (
     <section className="px-8 py-8 lg:py-16">
